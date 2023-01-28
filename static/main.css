@@ -1,0 +1,20 @@
+@font-face {
+    font-family: "ColfaxAI";
+    src: url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff2)
+        format("woff2"),
+      url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff) format("woff");
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  body {font-family: 'ColfaxAI'}
+  h1 {font-size: 32px; line-height: 40px; font-weight: bold; color: #202123; text-align: center; }
+
+  #container {height: 100%; width:100%; font-size: 0;}
+  #left, #middle {display: inline-block; *display: inline; zoom: 1; vertical-align: top; font-size: 12px; align-content: center; padding-left: 50px;}
+  #left {width: 25%; }
+  #middle {width: 50%; }
+  #right {width: 25%; }
+
+  img { width: 200px; height: 200px; }
+  img:hover { transform: scale(1.2); transition-duration: 1s; }
