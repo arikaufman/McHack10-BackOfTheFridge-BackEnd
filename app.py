@@ -9,7 +9,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-os.environ['OPENAI_API_KEY'] = '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'
+os.environ['OPENAI_API_KEY'] = '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'
 app.register_blueprint(chatgptadaptercontroller.bp)
 
 # unrouted page
