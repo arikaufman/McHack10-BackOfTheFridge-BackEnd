@@ -5,30 +5,5 @@
 </head>
 
 <body>
-<h1> Landing page for ML examples </h1>
-<div id="container">
-    <div id="left">
-        <img src="/static/gpticon.png">
-        <h3>Let's make a meal! </h3>
-        <form action="/chatgptadapter/generatesampleprompt" method="post">
-        <input type="text" name="ingredients" placeholder="Enter 3 ingredients, comma delimited." required />
-        <input type="submit" value="Generate meal" />
-        </form>
-        {% if result %}
-        <div id = 'result'>{{ result }}</div>
-        {% endif %}
-    </div>
-    <div id="middle">
-        <img src="/static/gpticon.png">
-        <h3>Let's generate an image... </h3>
-        <form action="/chatgptadapter/generateimage" method="post">
-        <input type="text" name="imageDescription" placeholder="describe a picture." required />
-        <input type="submit" value="Generate image" />
-        </form
-        {% if result %}
-        <div id = 'result'>result</div>
-        {% endif %}
-    </div>
-    <div id="right"></div>
-</div>
+<h1> Backend for McHacks 1- </h1>
 </body>
