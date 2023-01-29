@@ -6,7 +6,6 @@ co = cohere.Client(api_key='AP7n0AXHe7FNQFKd12cTiN0EcozoztsdpTHMuUfh')
 
 from Domain.Recipe import Recipe
 
-openai.api_key = os.getenv('OPENAI_API_KEY')
 bp = Blueprint('chatgptadaptercontroller', __name__, url_prefix='/chatgptadapter')
 
 @bp.route('/generatesampleprompt', methods=("GET", "POST"))
@@ -30,13 +29,3 @@ def generate_prompt():
     #recipe = Recipe()
     return response.generations[0].text
         #response.choices[0].text
-
-@bp.route('/generateimage', methods=("GET", "POST"))
-def generate_image():
-    prompt = request.form["imageDescription"]
-    response = openai.Image.create(
-            prompt=prompt,
-            n=1,
-            size="512x512"
-        )
-    return "<img src=" + response['data'][0]['url'] + ">"

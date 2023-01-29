@@ -1,20 +1,14 @@
-from flask import Blueprint, request, redirect, url_for
+from flask import Blueprint, request, redirect, url_for, jsonify
 import os
-import openai
 import cohere
+from Domain import imageDetectionDomain
+from Domain.Ingredients import Ingredients
 co = cohere.Client(api_key='AP7n0AXHe7FNQFKd12cTiN0EcozoztsdpTHMuUfh')
 
-from Domain.Recipe import Recipe
+bp = Blueprint('imageDetectionController', __name__, url_prefix='/imageDetection')
 
-openai.api_key = os.getenv('OPENAI_API_KEY')
-bp = Blueprint('chatgptadaptercontroller', __name__, url_prefix='/chatgptadapter')
-
-@bp.route('/generatesampleprompt', methods=("GET", "POST"))
-def generate_prompt():
-    prompt = request.form["ingredients"]
-    response = openai.Completion.create(
-            model="text-davinci-003",
-            prompt="Make a recipe out of " + prompt + " and give it a fun title",
-            temperature=0.6,
-            max_tokens=300
-        )
+@bp.route('/detectGroceries', methods=("GET", "POST"))
+def detect_groceries():
+    ingredientsArray = imageDetectionDomain.detectGroceries()
+    ingredientsReturn = Ingredients(ingredients=ingredientsArray)
+    return jsonify(ingredientsReturn.__dict__)
