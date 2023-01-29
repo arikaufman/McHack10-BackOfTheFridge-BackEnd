@@ -1,5 +1,5 @@
 class Recipe:
-    def __init__(self, title="", steps=[], ingredients=[]):
+    def __init__(self, title="", directions=[], ingredients=[]):
         self.title = title
-        self.steps = steps
+        self.directions = directions
         self.ingredients = ingredients
