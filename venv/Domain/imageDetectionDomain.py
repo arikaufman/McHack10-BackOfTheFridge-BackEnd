@@ -1,20 +1,21 @@
-# from imageai.Detection import ObjectDetection
-# import os
-# import torch
+from imageai.Classification import ImageClassification
+import os
 
+execution_path = os.getcwd()
+ingredients = {ingredient.lower() for ingredient in {'Coarse salt', 'Red chili flakes', 'Black peppercorns', 'Coriander', 
+'Fennel seeds', 'Paprika', 'Oregano', 'Turmeric', 'Whole nutmeg', 'Bay leaves', 'Cayenne pepper', 'Thyme', 'Cinnamon', 
+'Milk', 'Butter', 'Heavy cream', 'Eggs', 'Parmesan', 'Bacon', 'Parsley', 'Celery', 'Carrots', 'Lemons', 'Limes', 'Orange juice',
+ 'Garlic', 'Shallots', 'Potatoe', 'Onion', 'Tomato', 'Bean', 'Banana', 'Apple'}}
 
-# def recognize_food():
-#     execution_path = os.getcwd()
+def detectGroceries():
+    list_foods = [line.rstrip('\n').lower() for line in open('Common/FridgeItems.dict')]
+    prediction = ImageClassification()
+    prediction.setModelTypeAsResNet50()
+    prediction.setModelPath(os.path.join(execution_path, "Domain", "resnet50-19c8e357.pth"))
+    prediction.loadModel()
 
-#     detector = ObjectDetection()
-#     detector.setModelTypeAsRetinaNet()
-#     detector.setModelPath( os.path.join(execution_path , "resnet50_coco_best_v2.1.0.h5"))
-#     detector.loadModel()
-#     detections = detector.detectObjectsFromImage(input_image=os.path.join(execution_path , "applebanana.jpg"), output_image_path=os.path.join(execution_path , "imagenew.jpg"))
-
-#     for eachObject in detections:
-#         print(eachObject["name"] , " : " , eachObject["percentage_probability"] )
-
-# def load_food_name(food_type):
-#     names = [line.rstrip('\n').lower() for line in open('common/' + food_type + '.dict')]
-#     return names
+    predictions, probabilities = prediction.classifyImage(os.path.join(execution_path, "static" , "applebanana.jpg"), result_count=5)
+    for eachPrediction, eachProbability in zip(predictions, probabilities):
+        for ingredient in ingredients:
+            if eachPrediction in ingredient or ingredient in eachPrediction:
+                print(ingredient)
