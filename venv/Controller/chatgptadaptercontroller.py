@@ -94,6 +94,7 @@ def generate_prompt():
     #print(tempString)
     #print("listOfDirections: ")
     #print(listOfDirections)
+    title = title[3:]
     recipe = Recipe(title=title, ingredients=ingredients, directions=directions)
     #return response.generations[0].text
     return jsonify(recipe.__dict__)
